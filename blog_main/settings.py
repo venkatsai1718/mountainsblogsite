@@ -26,9 +26,15 @@ SECRET_KEY = "django-insecure-=&nfhg!+@!#r5r72hj*r8h9y(yo92$@=zsinh+wo^_7=b3fan(
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "127.0.0.1",
     "mountainsblogsite.onrender.com"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://mountainsblogsite.onrender.com"
+]
+
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 

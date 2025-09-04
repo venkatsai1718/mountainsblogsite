@@ -1,0 +1,25 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container post-div">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container custom-container " style="max-width: 1250px;">
+            <br><br>
+            <h3 class="fw-bolder"> Make a New post.</h3>
+            <hr><br>
+            <div class="mb-3">
+                <h5><label for="title" class="form-label">Title</label></h5>
+                <input type="text" class="form-control input_field" id="title" aria-describedby="emailHelp" name="title">
+            </div>
+            <div class="form-group">
+                <h5><label for="content">Content</label></h5>
+                <textarea class="form-control input_field" id="content" rows="7" name="content"></textarea>
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Save">
+        </div>
+    </form>
+</div>
+{%endblock%}

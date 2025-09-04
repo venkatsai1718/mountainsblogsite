@@ -1,0 +1,58 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+   <div class="container custom-container mt-3" style="max-width: 1350px; ">
+        {% for post in posts %}
+        <article class="media content-section">
+            <div class="media-body" style="border: 1px solid black; padding: 23px; margin-bottom: 10px;">
+                <div class="article-metadata">
+                    <h3 style="font-size:1.4rem;">{{ post.title }}</h3>
+                    <div>
+                        <p style="margin:0;">@ {{ post.author}}</p>
+                        <p style="margin:0;">{{ post.posted_date|date:"F d, Y" }}</p>
+                    </div>
+                </div>
+                <p>{{ post.content }}</p>
+                <div class="article-content">
+                    {%if user.is_authenticated%}
+                        <div class="options">
+                            <a href="{%url 'editblog' post.id%}" class="btn">Edit</a>
+                            <!-- Delete Link -->
+                            <a href="#" class='btn' data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            Delete
+                            </a>
+
+                            <!-- Bootstrap Modal -->
+                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header" style="padding-bottom: 10px;border-bottom: 1px solid black;">
+                                    <h5 class="modal-title" style="font-size: 1.2rem;font-weight:600;">Confirm Delete</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body" style="margin-block: 2rem;">
+                                    Are you sure you want to delete <strong>{{ post.title }}</strong>?
+                                </div>
+                                <div class="modal-footer" style="border: 0;">
+                                    <form method="POST" action="{% url 'delete_blog' post.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" style="padding:4px 20px;font-size: 0.75rem;">Yes, Delete</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" style="padding:4px 15px;font-size: 0.75rem;" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    {%endif%}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}

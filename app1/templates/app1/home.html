@@ -1,0 +1,43 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+   <div class="container custom-container mt-3" style="max-width: 1350px; ">
+        <!-- Featured Post -->
+        {% if featured_post %}
+        <article class="media content-section">
+            <div class="media-body feature-post" style="border: 1px solid black; padding: 23px; margin-bottom: 10px;">
+                <div class="article-metadata">
+                    <h3 style="font-size:1.6rem;font-weight: 600;color: rgb(72, 72, 237);;">{{ featured_post.title }}</h3>
+                    <div>
+                        <p style="margin:0;">@ {{ featured_post.author}}</p>
+                        <p style="margin:0;">{{ featured_post.posted_date|date:"F d, Y" }}</p>
+                    </div>
+                </div>
+                <p class="article-content">{{ featured_post.content }}</p>
+                <br><br>
+            </div>
+        </article>
+        {% endif %}
+        {% for post in posts %}
+        <article class="media content-section">
+            <div class="media-body" style="border: 1px solid black; padding: 23px; margin-bottom: 10px;">
+                <div class="article-metadata">
+
+                    <h3 style="font-size:1.4rem;font-weight: 600;">{{ post.title }}</h3>
+                    <div>
+                        <p style="margin:0;">@ {{ post.author}}</p>
+                        <p style="margin:0;">{{ post.posted_date|date:"F d, Y" }}</p>
+                    </div>
+                </div>
+
+                <p class="article-content">{{ post.content }}</p>
+                <br><br>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}
